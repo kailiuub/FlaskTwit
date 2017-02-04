@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html>
+
+<head>
+
+</head>
+
+
+<body>
+
+
+
+<dl>
+<p>User: {{user}}</p>
+<hr>
+
+<form action="{{url_for('add')}}" method='post'>
+
+<dl>
+<input type='hidden' name='username' size='30' value={{user}} />
+<dt>Title
+<dd><input type='text' name='title' id='title' size='30'/> 
+<dt>Posting
+<dd><textarea name='posting' id='posting' rows='10' cols='50'></textarea>
+<dt>Time
+<dd><input type='text' name='time'/ size='30'>
+<dd><input type='submit' value='share'/>
+</dl>
+
+</form>
+
+<hr>
+{% for item in dblist %}
+<dt><Strong>{{item.title}}</Strong>
+<dd>{{item.posting}} ---- {{item.time}}
+{% endfor %}
+</dl>
+
+</body>
+
+</html>
