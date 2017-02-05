@@ -9,9 +9,6 @@
 
 <body>
 
-
-
-
 <h3>User: {{user}}</h3>
 {% if not session.logged_in %}
 <p><a href='/login'>Login</a></p>
@@ -30,9 +27,8 @@
 <dd><input type='text' name='title' id='title' size='30'/> 
 <dt>Posting
 <dd><textarea name='posting' id='posting' rows='10' cols='50'></textarea>
-<dt>Time
-<dd><input type='text' name='time'/ size='30'>
-<dd><input type='submit' value='share'/>
+
+<br><input type='submit' value='share'/>
 </dl>
 
 </form>
@@ -45,7 +41,7 @@
 <dl>
 {% for item in dblist %}
 <dt><Strong>{{item.title}}</Strong>
-<dd>{{item.id}}----{{item.posting}} ---- {{item.time}}
+<dd>{{item.posting}} ---- {{item.time}}
 {% endfor %}
 </dl>
 

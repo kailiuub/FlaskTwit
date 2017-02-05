@@ -3,8 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash, _app_ctx_stack
 import os
-import time
-import datetime
+from datetime import datetime
 
 app=Flask(__name__)
 app.config.from_object(__name__)
@@ -41,14 +40,14 @@ class Blogdb(db.Model):
 @app.route('/posting/<user>', methods=['POST','GET'])
 def posting(user):
 	if request.method == 'POST':
-		#this can be solved by hiding posting UI in HTML		
-		#if not session.get('logged_in'):
-		#	abort(401)
+		if not session.get('logged_in'):
+			abort(401)
 		username=request.form['username']
 		user=username	
 		title=request.form['title']
 		posting=request.form['posting']
-		time=request.form['time']	
+		timenow=datetime.now()
+		time=timenow.strftime('%Y/%m/%d-%H:%M:%S')	
 		if title and posting:
 			bdb=Blogdb(username,title,posting,time)
 			#automatically select blogdb to add and commit
@@ -59,7 +58,6 @@ def posting(user):
 	dblist=Blogdb.query.filter_by(username=user).order_by(desc(Blogdb.id))
 	#show the profile specified by url <user>	
 	return render_template('blog.html', dblist=dblist, user=user)
-
 
 
 #main
