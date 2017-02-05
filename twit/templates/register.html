@@ -1,0 +1,47 @@
+<!doctype html>
+
+<html>
+
+<head>
+
+</head>
+
+
+<body>
+
+
+
+<dl>
+<h3>CuteBlog</h3>
+<hr>
+
+<h3>Register</h3>
+
+<!--registration form-->
+<form action="{{url_for('adduser')}}" method='post'>
+
+<dl>
+<dt>Username
+<dd><input type='text' name='username' id='username' size='30'/> 
+<dt>Email
+<dd><input type='text' name='email' id='email' size='30'/> 
+<dt>Password
+<dd><input type='password' name='password' id='password' rows='10' cols='50'/>
+<br>
+<br>
+<input type='submit' value='register' padding='10px'/>
+</dl>
+
+</form>
+
+<br>
+<!--flash feedback message-->
+{% for message in get_flashed_messages() %}
+<label'>Message: {{message}}</label>
+{% endfor %}
+
+<p><a href='/login'>Login</a></p>
+
+</body>
+
+</html>

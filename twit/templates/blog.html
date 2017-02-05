@@ -11,12 +11,19 @@
 
 
 
-<dl>
-<p>User: {{user}}</p>
+
+<h3>User: {{user}}</h3>
+{% if not session.logged_in %}
+<p><a href='/login'>Login</a></p>
+{% else %}
+<p><a href='/logout'>Logout</a></p>
+{% endif %}
 <hr>
 
-<form action="{{url_for('add')}}" method='post'>
-
+<!--hide posting UI if not logged in-->
+{% if session.logged_in %}
+<!--Posting UI-->
+<form action="{{url_for('posting',user=user)}}" method='post'>
 <dl>
 <input type='hidden' name='username' size='30' value={{user}} />
 <dt>Title
@@ -29,13 +36,21 @@
 </dl>
 
 </form>
+{% endif %}
 
 <hr>
+
+
+<!--Show all postings under the user-->
+<dl>
 {% for item in dblist %}
 <dt><Strong>{{item.title}}</Strong>
-<dd>{{item.posting}} ---- {{item.time}}
+<dd>{{item.id}}----{{item.posting}} ---- {{item.time}}
 {% endfor %}
 </dl>
+
+
+
 
 </body>
 
